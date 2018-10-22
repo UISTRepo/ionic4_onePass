@@ -1,0 +1,7 @@
+{
+  "name": "onePass",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
