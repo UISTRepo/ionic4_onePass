@@ -1,0 +1,22 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div text-center>
+        <img src="assets/img/fingerprint.png" style="width: 80px;" (click)="checkFingerprint()">
+    </div>
+
+    <ion-item>
+        <ion-input required type="password" placeholder="Password"></ion-input>
+    </ion-item>
+
+    <ion-button size="block" (click)="login()">
+        <span *ngIf="alreadySigned">Login</span>
+        <span *ngIf="!alreadySigned">Enter Password</span>
+    </ion-button>
+
+</ion-content>
