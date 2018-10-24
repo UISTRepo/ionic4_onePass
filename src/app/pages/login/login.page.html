@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>login</ion-title>
+        <ion-title>OnePass</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -11,8 +11,10 @@
     </div>
 
     <ion-item>
-        <ion-input required type="password" placeholder="Password"></ion-input>
+        <ion-input [(ngModel)]="pass" required type="password" placeholder="Password"></ion-input>
     </ion-item>
+
+    {{pass}}
 
     <ion-button size="block" (click)="login()">
         <span *ngIf="alreadySigned">Login</span>

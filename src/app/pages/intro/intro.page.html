@@ -12,30 +12,35 @@
     <ion-slides pager="true">
         <ion-slide>
             <div>
-                <img src="assets/icon/favicon.png" alt="">
+                <div>
+                    <img src="assets/icon/favicon.png" alt="">
+                </div>
+                <div>
+                    the textg
+                </div>
+                <ion-button shape="round" fill="outline" (click)="goNext()">Next</ion-button>
             </div>
+        </ion-slide>
+
+        <ion-slide>
             <div>
-                the textg
+                <div>
+                    <img src="assets/icon/favicon.png" alt="">
+                </div>
+                <h1>Slide 2</h1>
+                <ion-button shape="round" fill="outline" (click)="goNext()">Next</ion-button>
             </div>
-            <ion-button shape="round" fill="outline" (click)="goNext()">Next</ion-button>
 
         </ion-slide>
 
         <ion-slide>
             <div>
-                <img src="assets/icon/favicon.png" alt="">
+                <div>
+                    <img src="assets/icon/favicon.png" alt="">
+                </div>
+                <h1>Slide 3</h1>
+                <ion-button shape="round" fill="outline" href="/login" routerDirection="root">Start App</ion-button>
             </div>
-            <h1>Slide 2</h1>
-            <ion-button shape="round" fill="outline" (click)="goNext()">Next</ion-button>
-
-        </ion-slide>
-
-        <ion-slide>
-            <div>
-                <img src="assets/icon/favicon.png" alt="">
-            </div>
-            <h1>Slide 3</h1>
-            <ion-button shape="round" fill="outline" href="/login" routerDirection="root">Start App</ion-button>
 
         </ion-slide>
     </ion-slides>
