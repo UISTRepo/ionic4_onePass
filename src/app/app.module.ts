@@ -11,15 +11,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
 import {FormsModule} from '@angular/forms';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
-  declarations: [AppComponent, EditPasswordComponent],
-  entryComponents: [EditPasswordComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, FormsModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, EditPasswordComponent],
+    entryComponents: [EditPasswordComponent],
+    imports: [
+        IonicStorageModule.forRoot(),
+        BrowserModule,
+        IonicModule.forRoot(),
+        AppRoutingModule,
+        FormsModule
+    ],
+    providers: [
+        StatusBar,
+        SplashScreen,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}

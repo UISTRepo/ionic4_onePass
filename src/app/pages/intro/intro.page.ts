@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import {NavController, Platform} from '@ionic/angular';
 
 @Component({
     selector: 'app-intro',
@@ -9,7 +11,12 @@ export class IntroPage implements OnInit {
 
     private slides;
 
-    constructor() {
+    constructor(
+        private storage: Storage,
+        private navCtrl: NavController,
+        private platform: Platform
+    ) {
+
     }
 
     ngOnInit() {
@@ -22,6 +29,12 @@ export class IntroPage implements OnInit {
 
     goNext() {
         this.slides.slideNext();
+    }
+
+    setOpenedIntro(){
+
+        this.storage.set('onePass.opened_slides', true);
+
     }
 
 }

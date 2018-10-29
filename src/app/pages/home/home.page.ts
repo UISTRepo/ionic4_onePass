@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {PopoverController} from '@ionic/angular';
 import {EditPasswordComponent} from '../../edit-password/edit-password.component';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-home',
@@ -11,38 +12,23 @@ export class HomePage {
 
     items: any = [];
 
-    constructor(private popoverCtrl: PopoverController) {
+    private nextId: number;
 
-        let item1 = {
-            id: 1,
-            title: 'Facebook',
-            user: '123@123.com',
-            pass: '111111'
-        };
+    constructor(private popoverCtrl: PopoverController, private storage: Storage) {
 
-        this.items.push(item1);
+        this.storage.get('onePass.stored_passwords').then((data) => {
 
-        let item2 = {
-            id: 2,
-            title: 'GMail',
-            user: 'asd@asd.com',
-            pass: '111111'
-        };
+            this.items = !data ? [] : data;
 
-        this.items.push(item2);
+            this.nextId = !data ? 1 : Number(this.items[this.items.length - 1].id) + 1;
 
-    }
-
-    addItem(){
-
-        let item2 = {
-            id: 1,
-            title: 'New item',
-            user: 'email@email.com',
-            pass: 'PPPPPPP'
-        };
-
-        this.items.push(item2);
+            /*if(!data){
+                this.items = [];
+            }
+            else{
+                this.items = data;
+            }*/
+        })
 
     }
 
@@ -51,11 +37,52 @@ export class HomePage {
         const popoverElement = await this.popoverCtrl.create({
             component: EditPasswordComponent,
             componentProps: {
-                data: data
+                data: data,
+                id: (data && data.id) ? data.id : this.nextId
             }
         });
+
+        popoverElement.onDidDismiss().then((returnedData) => {
+
+            if(returnedData.data){
+
+                let item = returnedData.data;
+
+                if(item.oldData){
+
+                    this.items.forEach((value) => {
+                        if(value.id == item.id){
+                            value = item
+                        }
+                    });
+
+                    this.storage.set('onePass.stored_passwords', this.items);
+
+                }
+                else{
+
+                    delete item['oldData'];
+
+                    this.items.push(item);
+
+                    this.nextId++;
+                    this.storage.set('onePass.stored_passwords', this.items);
+                }
+
+            }
+
+        });
+
         return await popoverElement.present();
 
+    }
+
+    deleteItem(item){
+        this.items = this.items.filter((el) => {
+            return el.id !== item.id;
+        });
+
+        this.storage.set('onePass.stored_passwords', this.items);
     }
 
 }

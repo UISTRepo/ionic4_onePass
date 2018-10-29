@@ -14,8 +14,6 @@
         <ion-input [(ngModel)]="pass" required type="password" placeholder="Password"></ion-input>
     </ion-item>
 
-    {{pass}}
-
     <ion-button size="block" (click)="login()">
         <span *ngIf="alreadySigned">Login</span>
         <span *ngIf="!alreadySigned">Enter Password</span>

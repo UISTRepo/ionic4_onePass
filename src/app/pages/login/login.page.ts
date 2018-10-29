@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {NavController, ToastController} from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {NavController, Platform, ToastController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-login',
@@ -8,16 +9,26 @@ import {NavController, ToastController} from '@ionic/angular';
 })
 export class LoginPage implements OnInit {
 
-    public alreadySigned = 1;
+    public alreadySigned;
 
-    pass: string = '123456';
+    pass: string;
 
-    constructor(private navCtrl: NavController, public toastController: ToastController){ }
+    constructor(
+        private navCtrl: NavController,
+        public toastController: ToastController,
+        private storage: Storage,
+        private platform: Platform
+    ){ }
 
     ngOnInit(){
 
-        this.alreadySigned === 1 ? true : false;
+        this.platform.ready().then(() => {
+            this.storage.get('onePass.master_password').then((data) => {
 
+                this.alreadySigned = data ? true : false;
+
+            })
+        })
     }
 
     async presentToast(message) {
@@ -30,6 +41,11 @@ export class LoginPage implements OnInit {
 
     login() {
 
+        if(!this.pass){
+            this.presentToast('Enter your password');
+            return;
+        }
+
         // validate the input
         if(this.pass.length < 6){
 
@@ -38,13 +54,26 @@ export class LoginPage implements OnInit {
         }
 
         if(this.alreadySigned){
-            console.log('compare the password agains the stored one');
+
+            this.storage.get('onePass.master_password').then((password) => {
+
+                if(this.pass !== password){
+                    this.presentToast('The password is wrong');
+                    return;
+                }
+                else{
+                    this.navCtrl.navigateRoot('/home');
+                }
+
+            });
+
         }
         else {
-           console.log('store the new password');
+            this.storage.set('onePass.master_password', this.pass);
+
+            this.navCtrl.navigateRoot('/home');
         }
 
-        this.navCtrl.navigateRoot('/home');
     }
 
     checkFingerprint(){

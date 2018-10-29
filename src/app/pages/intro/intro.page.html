@@ -2,7 +2,7 @@
     <ion-toolbar>
         <ion-title>intro</ion-title>
         <ion-buttons slot="end">
-            <ion-button href="/login" routerDirection="root">Skip</ion-button>
+            <ion-button href="/login" routerDirection="root" (click)="setOpenedIntro()">Skip</ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
@@ -39,7 +39,7 @@
                     <img src="assets/icon/favicon.png" alt="">
                 </div>
                 <h1>Slide 3</h1>
-                <ion-button shape="round" fill="outline" href="/login" routerDirection="root">Start App</ion-button>
+                <ion-button shape="round" fill="outline" (click)="setOpenedIntro()" href="/login" routerDirection="root">Start App</ion-button>
             </div>
 
         </ion-slide>
