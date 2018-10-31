@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController, Platform, ToastController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-login',
@@ -9,15 +10,19 @@ import {Storage} from '@ionic/storage';
 })
 export class LoginPage implements OnInit {
 
+    loginForm: FormGroup;
+
     public alreadySigned;
 
     pass: string;
+    user: string;
 
     constructor(
         private navCtrl: NavController,
         public toastController: ToastController,
         private storage: Storage,
-        private platform: Platform
+        private platform: Platform,
+        private formBuilder: FormBuilder
     ){ }
 
     ngOnInit(){
@@ -28,7 +33,18 @@ export class LoginPage implements OnInit {
                 this.alreadySigned = data ? true : false;
 
             })
-        })
+        });
+
+        this.loginForm = this.formBuilder.group({
+            password: ['', [
+                Validators.required,
+                Validators.minLength(5)
+            ]]
+            // email: ['', [
+            //     Validators.required,
+            //     Validators.email
+            // ]]
+        });
     }
 
     async presentToast(message) {
@@ -41,14 +57,12 @@ export class LoginPage implements OnInit {
 
     login() {
 
-        if(!this.pass){
-            this.presentToast('Enter your password');
-            return;
-        }
+        // if(!this.loginForm.controls.email.valid){
+        //     this.presentToast('Enter your email');
+        //     return;
+        // }
 
-        // validate the input
-        if(this.pass.length < 6){
-
+        if(!this.loginForm.controls.password.valid){
             this.presentToast('The password should be at least 6 chars');
             return;
         }

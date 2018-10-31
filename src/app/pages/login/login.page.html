@@ -10,13 +10,20 @@
         <img src="assets/img/fingerprint.png" style="width: 80px;" (click)="checkFingerprint()">
     </div>
 
-    <ion-item>
-        <ion-input [(ngModel)]="pass" required type="password" placeholder="Password"></ion-input>
-    </ion-item>
+    <form [formGroup]="loginForm">
+        <!--<ion-item>-->
+            <!--<ion-input formControlName="email" [(ngModel)]="user" required type="email" placeholder="Username"></ion-input>-->
+        <!--</ion-item>-->
+        <ion-item>
+            <ion-input formControlName="password" [(ngModel)]="pass" required type="password" placeholder="Password"></ion-input>
+        </ion-item>
 
-    <ion-button size="block" (click)="login()">
-        <span *ngIf="alreadySigned">Login</span>
-        <span *ngIf="!alreadySigned">Enter Password</span>
-    </ion-button>
+        <ion-button size="block" (click)="login()">
+            <span *ngIf="alreadySigned">Login</span>
+            <span *ngIf="!alreadySigned">Enter Password</span>
+        </ion-button>
+    </form>
+
+
 
 </ion-content>

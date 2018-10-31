@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { EditPasswordComponent } from './edit-password/edit-password.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -21,7 +21,8 @@ import { IonicStorageModule } from '@ionic/storage';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
     providers: [
         StatusBar,
