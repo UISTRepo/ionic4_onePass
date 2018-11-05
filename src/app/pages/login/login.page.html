@@ -7,7 +7,7 @@
 <ion-content padding>
 
     <div text-center>
-        <img src="assets/img/fingerprint.png" style="width: 80px;" (click)="checkFingerprint()">
+        <img style="width: 60%" src="assets/img/app-icon.png" (click)="checkFingerprint()">
     </div>
 
     <form [formGroup]="loginForm">
@@ -18,12 +18,26 @@
             <ion-input formControlName="password" [(ngModel)]="pass" required type="password" placeholder="Password"></ion-input>
         </ion-item>
 
-        <ion-button size="block" (click)="login()">
+        <ion-button size="block" (click)="login()" color="primary">
             <span *ngIf="alreadySigned">Login</span>
             <span *ngIf="!alreadySigned">Enter Password</span>
         </ion-button>
     </form>
 
+    <div padding-top>
+        <div text-center *ngIf="isFingerprintAvailable">
+            <img src="assets/img/fingerprint.png" style="width: 80px;" (click)="checkFingerprint()">
+            <div>
+                Tap here for fingerprint
+            </div>
+        </div>
 
+        <div text-center *ngIf="!isFingerprintAvailable">
+            <img src="assets/img/no_fingerprints.png" style="width: 80px;">
+            <div>
+                There is no fingerprint support
+            </div>
+        </div>
+    </div>
 
 </ion-content>
