@@ -13,6 +13,7 @@ export class EditPasswordComponent implements OnInit {
 
     data: any = {};
     private id: number;
+    editData: boolean = false;
 
     constructor(
         private navParams: NavParams,
@@ -20,6 +21,9 @@ export class EditPasswordComponent implements OnInit {
         private popoverController: PopoverController
     ) {
         this.openedOldEntry = this.navParams.get('data') ? true : false;
+
+        this.editData = !this.openedOldEntry;
+
     }
 
     ngOnInit() {

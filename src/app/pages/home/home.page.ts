@@ -39,7 +39,8 @@ export class HomePage {
             componentProps: {
                 data: data,
                 id: (data && data.id) ? data.id : this.nextId
-            }
+            },
+            cssClass: 'edit-pass-popover'
         });
 
         popoverElement.onDidDismiss().then((returnedData) => {
